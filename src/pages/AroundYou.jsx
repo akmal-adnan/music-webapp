@@ -11,15 +11,18 @@ const AroundYou = () => {
   const { data, isFetching, error } = useGetSongsByCountryQuery(country);
 
   useEffect(() => {
-    axios
-      .get(
-        `https://geo.ipify.org/api/v1?apiKey=${
-          import.meta.env.VITE_GEO_API_KEY
-        }`
-      )
-      .then((res) => setCountry(res?.data?.location?.country))
-      .catch((err) => console.log(err))
-      .finally(() => setLoading(false));
+    // Ipify not working in Malaysia
+    // axios
+    //   .get(
+    //     `https://geo.ipify.org/api/v1?apiKey=${
+    //       import.meta.env.VITE_GEO_API_KEY
+    //     }`
+    //   )
+    //   .then((res) => setCountry(res?.data?.location?.country))
+    //   .catch((err) => console.log(err))
+    //   .finally(() => setLoading(false));
+
+    setCountry('MY');
   }, [country]);
 
   if (isFetching && loading) return <Loader title="Loading songs around you" />;
@@ -29,7 +32,7 @@ const AroundYou = () => {
   return (
     <div className="flex flex-col">
       <h2 className="font-bold text-3xl text-white text-left mt-4 mb-10">
-        Around You <span className="font-black">{country}</span>
+        Around You <span className="">&quot;{country}&quot;</span>
       </h2>
 
       <div className="flex flex-wrap sm:justify-start justify-center gap-8">
